@@ -2,6 +2,7 @@ package ch.hearc.st.app;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -48,7 +49,7 @@ public class Main {
     String textec = sb.toString();
 
 
-    String code = "DEMAIN";
+    String code = "MARCEL";
 
 
     String[][] matrice = new String[6][6];
@@ -64,13 +65,50 @@ public class Main {
         matrice[i][j] = ce.toString();
       }
     }
-
-    for(int i = 0; i < matrice.length; i++){
-      for(int j = 0; j < matrice[i].length; j++){
+    System.out.println("matrice 1");
+    for(int i = 0; i < matrice.length; i++) {
+      for (int j = 0; j < matrice[i].length; j++) {
         System.out.print(matrice[i][j] + " ");
       }
       System.out.println();
     }
+      ArrayList <Integer> l = new ArrayList<>();
+      l.add(1);
+      l.add(3);
+      l.add(4);
+      l.add(5);
+      l.add(0);
+      l.add(2);
+      int index=0;
+      int colMatrice2;
+      int colMatrice1= 0;
+      String[][] matrice2 = new String[6][6];
+      for(int iz = 0; iz < matrice2.length; iz++){
+        matrice2[iz] = new String[6];
+      }
+      do{
+
+        colMatrice2 = l.get(index);
+        for(int jr = 0; jr < l.size(); jr++) {
+          matrice2[jr][colMatrice2] = matrice[jr][colMatrice1];
+
+        }
+        colMatrice1++;
+        index++;
+
+        } while (colMatrice1<=l.size()-1);
+    System.out.println("matrice 2");
+      for(int ic = 0; ic < matrice2.length; ic++){
+        for(int jc = 0; jc < matrice2[ic].length; jc++){
+          System.out.print(matrice2[ic][jc] + " ");
+        }
+        System.out.println("");
+      }
+
+
+
+      }
+
 
 
 
@@ -80,4 +118,4 @@ public class Main {
 
   }
 
-}
+
