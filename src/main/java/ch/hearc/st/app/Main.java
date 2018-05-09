@@ -1,8 +1,5 @@
 package ch.hearc.st.app;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -11,70 +8,123 @@ public class Main {
 
   public static void main(String[] args) {
 
-  LinkedList<Character> chars = new LinkedList<>();
+    String alphabet = "abcdefghijklmnopqrstuvwxyz0123456789";
+    String example = "c1ofwjymt5b4i7a28sp30qhxkeul6dvrgzn9";
 
-  for(int i = 97;i<=122;i++){
-    chars.add(Character.valueOf((char)i));
-  }
-  for(int i = 48;i<=57;i++){
-    chars.add(Character.valueOf((char)i));
-  }
+    /**
+    LinkedList<Character> chars = new LinkedList<>();
+    for(Character c : alphabet.toCharArray()) {
+      chars.add(c);
+    }
+    Collections.shuffle(chars);
+    **/
 
-  Collections.shuffle(chars);
+    LinkedList<Character> chars = new LinkedList<>();
+    for(Character c : example.toCharArray()) {
+      chars.add(c);
+    }
 
-  Map<Character, String> map = new HashMap<>();
-
-  BiMap<Character, String> myBiMap = HashBiMap.create();
+  Map<Character, String> carte = new HashMap<>();
+  Map<String, Character> carteInversee = new HashMap<>();
 
   String[] m = {"A","D","F","G","V","X"};
-  for(String s1 : m){
-    for(String s2 : m) {
-      myBiMap.put(chars.pop(), s1+s2);
+  for(String ligne : m){
+    for(String colonne : m) {
+      carte.put(chars.getFirst(), ligne+colonne);
+      carteInversee.put(ligne+colonne, chars.pop());
     }
   }
 
-  BiMap<String, Character> myBiMapInversed = myBiMap.inverse();
-
-  String texte = "objectifarras15h28";
-    System.out.println(texte);
+  String messageClair = "objectifarras15hobjectifarras15h";
+    System.out.println(messageClair);
 
   StringBuilder sb = new StringBuilder();
-    for(Character c : texte.toCharArray()) {
-      sb.append(myBiMap.get(c));
+    for(Character c : messageClair.toCharArray()) {
+      sb.append(carte.get(c));
+    }
+  String messageChiffre = sb.toString();
+    System.out.println(messageChiffre);
+
+    //print
+    sb = new StringBuilder();
+    sb.append("   ");
+    for(String colonne : m){
+      sb.append(colonne).append("  ");
+    }
+    System.out.println(sb.toString());
+    for(String ligne : m){
+      sb = new StringBuilder();
+      sb.append(ligne).append("  ");
+      for(String colonne : m) {
+        carteInversee.get(ligne+colonne);
+        sb.append(carteInversee.get(ligne+colonne)).append("  ");
+      }
+      System.out.println(sb.toString());
     }
 
-    System.out.println(sb.toString());
-
-    String textec = sb.toString();
 
 
     String code = "DEMAIN";
 
 
-    String[][] matrice = new String[6][6];
-    for(int i = 0; i < matrice.length; i++){
-      matrice[i] = new String[6];
+
+    int ii = 0;
+    int jj = 0;
+    for(Character c : messageChiffre.toCharArray()) {
+      jj++;
+      if(jj==code.length()){
+        jj=0;
+        ii++;
+      }
     }
+
+    int len = ii+1;
+
+    //générer grille 1
+    String[][] grille = new String[len][code.length()];
+    int i = 0;
+    int j = 0;
+
+
+    /**
+    for(Character c : messageChiffre.toCharArray()) {
+
+      grille[i][j] = c.toString();
+      j++;
+
+      if(j==code.length()){
+        j=0;
+        i++;
+      }
+
+    }**/
+
+
     int count = 0;
-    for(int i = 0; i < matrice.length; i++){
-      for(int j = 0; j < matrice[i].length; j++){
-        // On appelle la méthode nextInt() de l'objet scanner, qui retourne l'entier que l'on frappe au clavier.
-        Character ce = textec.charAt(count);
+
+    for(i=0;i<grille.length;i++){
+
+      for(j=0;j<grille[i].length;j++){
+        if(count<messageChiffre.length()) {
+          Character cc = messageChiffre.charAt(count);
+          grille[i][j] = cc.toString();
+        }else{
+          grille[i][j] = "";
+        }
         count++;
-        matrice[i][j] = ce.toString();
       }
-    }
 
-    for(int i = 0; i < matrice.length; i++){
-      for(int j = 0; j < matrice[i].length; j++){
-        System.out.print(matrice[i][j] + " ");
-      }
-      System.out.println();
     }
 
 
-
-
+    System.out.println("grille1");
+    for(i=0;i<grille.length;i++){
+      sb = new StringBuilder();
+      for(j=0;j<grille[i].length;j++){
+        sb.append(grille[i][j]).append(" ");
+      }
+      System.out.println(sb.toString());
+    }
 
 
 
