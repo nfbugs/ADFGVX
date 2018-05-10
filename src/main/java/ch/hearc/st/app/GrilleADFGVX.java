@@ -10,7 +10,7 @@ public class GrilleADFGVX {
   private String alphabet = "abcdefghijklmnopqrstuvwxyz0123456789";
   private String example = "c1ofwjymt5b4i7a28sp30qhxkeul6dvrgzn9";
 
-  String[] lettres = {"A","D","F","G","V","X"};
+  String[] lettres = {"A", "D", "F", "G", "V", "X"};
 
   private Map<Character, String> grille;
   private Map<String, Character> grilleInversee;
@@ -22,76 +22,75 @@ public class GrilleADFGVX {
 
   }
 
-  public void create(Boolean random){
+  public void creer(Boolean random) {
 
     LinkedList<Character> chars = new LinkedList<>();
 
-    if(random){
-      for(Character c : alphabet.toCharArray()) {
+    if (random) {
+      for (Character c : alphabet.toCharArray()) {
         chars.add(c);
       }
       Collections.shuffle(chars);
-    }else{
-      for(Character c : example.toCharArray()) {
+    } else {
+      for (Character c : example.toCharArray()) {
         chars.add(c);
       }
     }
-    for(String ligne : lettres){
-      for(String colonne : lettres) {
-        this.grille.put(chars.getFirst(), ligne+colonne);
-        this.grilleInversee.put(ligne+colonne, chars.pop());
+    for (String ligne : lettres) {
+      for (String colonne : lettres) {
+        this.grille.put(chars.getFirst(), ligne + colonne);
+        this.grilleInversee.put(ligne + colonne, chars.pop());
       }
     }
   }
 
-  public String print(){
+  public String print() {
 
     StringBuilder sb = new StringBuilder();
     sb.append("   ");
-    for(String colonne : lettres){
+    for (String colonne : lettres) {
       sb.append(colonne).append("  ");
     }
     sb.append("\n");
-    for(String ligne : lettres){
+    for (String ligne : lettres) {
       sb.append(ligne).append("  ");
-      for(String colonne : lettres) {
-        grille.get(ligne+colonne);
-        sb.append(grilleInversee.get(ligne+colonne)).append("  ");
+      for (String colonne : lettres) {
+        grille.get(ligne + colonne);
+        sb.append(grilleInversee.get(ligne + colonne)).append("  ");
       }
       sb.append("\n");
     }
     return sb.toString();
   }
 
-  public String chiffrer(String message){
+  public String chiffrer(String message) {
 
     StringBuilder sb = new StringBuilder();
 
-    for(Character c : message.toCharArray()) {
+    for (Character c : message.toCharArray()) {
       sb.append(grille.get(c));
     }
 
     return sb.toString();
   }
 
-  public String dechiffrer(String message){
+  public String dechiffrer(String message) {
 
     StringBuilder sb = new StringBuilder();
 
     int i = 1;
     String couple = "";
 
-    for(Character c : message.toCharArray()) {
-      if(i%2==0) {
+    for (Character c : message.toCharArray()) {
+      if (i % 2 == 0) {
         couple = couple + c.toString();
         sb.append(grilleInversee.get(couple));
         couple = "";
-      }else{
-        couple=c.toString();
+      } else {
+        couple = c.toString();
       }
       i++;
     }
-
     return sb.toString();
   }
 
