@@ -64,10 +64,21 @@ public class GrilleADFGVX {
   }
 
   public String chiffrer(String message) {
-
+    boolean aideUtilise = false;
     StringBuilder sb = new StringBuilder();
 
     for (Character c : message.toCharArray()) {
+      if (!aideUtilise) {
+        System.out.println();
+        System.out.println("Le caractère " + c + " sera chiffré " + grille.get(c)
+            + " selon la grille ADFGVX de départ");
+        System.out.println(grille.get(c)
+            + " correspondent à la ligne (1er caractère) et à la colonne (2ème caractère) de la grille, on retrouve bien "
+            + c);
+        System.out.println("-------------------");
+        System.out.println();
+        aideUtilise = true;
+      }
       sb.append(grille.get(c));
     }
 
@@ -75,7 +86,7 @@ public class GrilleADFGVX {
   }
 
   public String dechiffrer(String message) {
-
+    boolean aideUtilise = false;
     StringBuilder sb = new StringBuilder();
 
     int i = 1;
@@ -85,6 +96,17 @@ public class GrilleADFGVX {
       if (i % 2 == 0) {
         couple = couple + c.toString();
         sb.append(grilleInversee.get(couple));
+        if (!aideUtilise) {
+          System.out.println();
+          System.out.println("Les caractères " + couple + " seront déchiffrés "
+              + sb.toString() + " selon la grille ADFGVX de base");
+          System.out.println("Comme pour le chiffrement, " + couple
+              + " correspondent à la ligne (1er caractère) et à la colonne (2ème caractère)"
+              + " de la grille, on retrouve bien " + sb.toString());
+          System.out.println();
+          aideUtilise = true;
+
+        }
         couple = "";
       } else {
         couple = c.toString();
