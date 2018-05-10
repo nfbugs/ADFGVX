@@ -37,7 +37,7 @@ public class Main {
     System.out.println("");
 
     System.out.println("Grille 2");
-    String[][] grille2 = Utils.permuter(grille1, permutation);
+    String[][] grille2 = Utils.permuter(grille1, permutation, messageAvantPermutation);
     System.out.println(Utils.print(grille2));
     System.out.println("");
 
