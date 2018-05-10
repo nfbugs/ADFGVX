@@ -1,5 +1,7 @@
 package ch.hearc.st.app;
 
+import java.util.ArrayList;
+
 public class Utils {
 
   public Utils() {
@@ -42,11 +44,37 @@ public class Utils {
 
   }
 
-  public static String[][] permuter(String[][] grille, String permutation){
+  public static String[][] permuter(String[][] grille, String permutation, String messageAvantPermutation){
+    ArrayList<Integer> l = new ArrayList<>();
+    l.add(1);
+    l.add(3);
+    l.add(4);
+    l.add(5);
+    l.add(0);
+    l.add(2);
+    //A effacer après implémentation calculPermutation
 
-    //TODO:permuter la grille selon String permutation passé en paramètre
+    int taillelig = (int) Math.ceil(messageAvantPermutation.length() / l.size());
+    int taillecol = l.size();
+    String[][] grillePermute= new String [taillelig+1][taillecol];
+    int colGrillePermutation;
+    int indexPermutation = 0;
+    int colGrille = 0;
 
-    return grille;
+    do{
+
+      colGrillePermutation = l.get(indexPermutation);
+
+      for(int j = 0; j <= taillelig; j++) {
+        grillePermute[j][colGrillePermutation] = grille[j][colGrille];
+
+      }
+      colGrille++;
+      indexPermutation++;
+
+    } while (colGrille<=l.size()-1);
+
+    return grillePermute;
 
   }
 
