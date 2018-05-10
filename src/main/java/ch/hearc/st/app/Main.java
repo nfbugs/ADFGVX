@@ -1,82 +1,48 @@
 package ch.hearc.st.app;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
 
+  private static Scanner scanner = new Scanner(System.in);
+
   public static void main(String[] args) {
 
-  LinkedList<Character> chars = new LinkedList<>();
+    GrilleADFGVX grilleADFGVX = new GrilleADFGVX();
 
-  for(int i = 97;i<=122;i++){
-    chars.add(Character.valueOf((char)i));
-  }
-  for(int i = 48;i<=57;i++){
-    chars.add(Character.valueOf((char)i));
-  }
+    System.out.println("Message à chiffrer :");
+    String message = scanner.nextLine();
 
-  Collections.shuffle(chars);
+    grilleADFGVX.creer(false);
+    System.out.println("---Grille ADFGVX---");
+    System.out.println(grilleADFGVX.print());
+    System.out.println("-------------------");
+    System.out.println("");
 
-  Map<Character, String> map = new HashMap<>();
+    System.out.println("Message chiffré avant permutation : ");
+    String messageAvantPermutation = grilleADFGVX.chiffrer(message.toLowerCase());
+    System.out.println(messageAvantPermutation);
+    System.out.println("");
 
-  BiMap<Character, String> myBiMap = HashBiMap.create();
+    System.out.println("Code :");
+    String code = scanner.nextLine();
 
-  String[] m = {"A","D","F","G","V","X"};
-  for(String s1 : m){
-    for(String s2 : m) {
-      myBiMap.put(chars.pop(), s1+s2);
-    }
-  }
+    System.out.println("Grille 1");
+    String[][] grille1 = Utils.generer(code, messageAvantPermutation);
+    System.out.println(Utils.print(grille1));
+    System.out.println("");
 
-  BiMap<String, Character> myBiMapInversed = myBiMap.inverse();
+    String permutation = Utils.calculPermutation(code);
+    System.out.println("Code permutation : " +permutation);
+    System.out.println("");
 
-  String texte = "objectifarras15h28";
-    System.out.println(texte);
+    System.out.println("Grille 2");
+    String[][] grille2 = Utils.permuter(grille1, permutation, messageAvantPermutation);
+    System.out.println(Utils.print(grille2));
+    System.out.println("");
 
-  StringBuilder sb = new StringBuilder();
-    for(Character c : texte.toCharArray()) {
-      sb.append(myBiMap.get(c));
-    }
-
-    System.out.println(sb.toString());
-
-    String textec = sb.toString();
-
-
-    String code = "DEMAIN";
-
-
-    String[][] matrice = new String[6][6];
-    for(int i = 0; i < matrice.length; i++){
-      matrice[i] = new String[6];
-    }
-    int count = 0;
-    for(int i = 0; i < matrice.length; i++){
-      for(int j = 0; j < matrice[i].length; j++){
-        // On appelle la méthode nextInt() de l'objet scanner, qui retourne l'entier que l'on frappe au clavier.
-        Character ce = textec.charAt(count);
-        count++;
-        matrice[i][j] = ce.toString();
-      }
-    }
-
-    for(int i = 0; i < matrice.length; i++){
-      for(int j = 0; j < matrice[i].length; j++){
-        System.out.print(matrice[i][j] + " ");
-      }
-      System.out.println();
-    }
-
-
-
-
-
-
+    System.out.println("Message chiffré :");
+    System.out.println(Utils.lire(grille2));
 
   }
 
