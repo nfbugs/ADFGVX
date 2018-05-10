@@ -34,15 +34,6 @@ public class Utils {
     return grille;
   }
 
-  public static String calculPermutation(String code){
-
-    Crypto crypto = new Crypto();
-
-    String permutation = crypto.creerPermut(code);
-
-    return permutation;
-
-  }
 
   public static String[][] permuter(String[][] grille, String permutation, String messageAvantPermutation){
     String[] split = permutation.split(",");
@@ -82,7 +73,7 @@ public class Utils {
     int count = 1;
     for(i=0;i<grille.length;i++){
       for(j=0;j<grille[i].length;j++){
-        sb.append(grille[i][j]).append("");
+        sb.append(grille[i][j]);
         if(count%5==0){
           sb.append(" ");
         }
@@ -105,6 +96,76 @@ public class Utils {
     return sb.toString();
   }
 
+  private static int[] tabIndicesPermutation(String reference, String code) {
+    int[] tab = new int[code.length()];
+    code = code.toUpperCase();
+    reference = reference.toUpperCase();
+    String perm = "";
+    int nbiter = code.length();
+    int k = 0;
+
+    for (int m = 0; m < nbiter; m++) {
+      int rang = 1000;
+      for (int n = 0; n < nbiter; n++) {
+        char ch = code.charAt(n);
+        if (reference.indexOf(ch) < rang) {
+          int j = n + 1;
+          boolean ok = true;
+          for (int r = 0; r < m; r++) {
+            ok = ok && (j != tab[r]);
+          }
+          if (ok) {
+            rang = reference.indexOf(ch);
+            k = j;
+          }
+        }
+      }
+      tab[m] = k;
+    }
+
+    return tab;
+  }
+
+  private static String getMotPermutation(int[] tab, String code) {
+    String codeOrd = "";
+    Integer index = 0;
+    do {
+      codeOrd += (code.charAt((tab[index] - 1)));
+      index++;
+    } while (index < tab.length);
+
+    return codeOrd;
+  }
+
+  private static String getIndicePermutation(int[] tab) {
+    String perm = "";
+    int nbiter = tab.length;
+
+    for (int m = 0; m < nbiter; m++) {
+      perm += tab[m];
+      if (m < nbiter - 1) {
+        perm += ",";
+      }
+    }
+
+    return perm;
+  }
+
+  public static String indicePermutation(String reference, String code) {
+    int index[] = tabIndicesPermutation(reference, code);
+
+    return getIndicePermutation(index);
 
 
+  }
+
+  public static String motPermutation(String reference, String code) {
+    int index[] = tabIndicesPermutation(reference, code);
+
+    return getMotPermutation(index, code);
+
+
+  }
 }
+
+
