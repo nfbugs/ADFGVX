@@ -34,52 +34,6 @@ public class Utils {
     return grille;
   }
 
-  public static String calculPermutation(String code){
-
-    Crypto crypto = new Crypto();
-
-    String permutation = crypto.creerPermut(code);
-
-    return permutation;
-
-  }
-
-  public static String permutationDechiffrement(String code) {
-
-    String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    String codeChiffre = calculPermutation(code);
-    int[] tab = new int[code.length()];
-    code = code.toUpperCase();
-    String perm = "";
-    int nbiter = code.length();
-    int k = 0;
-
-    for (int m = 0; m < nbiter; m++) {
-      int rang = 1000;
-      for (int n = 0; n < nbiter; n++) {
-        char ch = codeChiffre.charAt(n);
-        if (alphabet.indexOf(ch) < rang) {
-          int j = n + 1;
-          boolean ok = true;
-          for (int r = 0; r < m; r++) {
-            ok = ok && (j != tab[r]);
-          }
-          if (ok) {
-            rang = code.indexOf(ch);
-            k = j;
-          }
-        }
-      }
-      tab[m] = k;
-    }
-    for (int m = 0; m < nbiter; m++) {
-      perm += tab[m];
-      if (m < nbiter - 1) {
-        perm += ",";
-      }
-    }
-    return perm;
-  }
 
   public static String[][] permuter(String[][] grille, String permutation, String messageAvantPermutation){
     String[] split = permutation.split(",");
@@ -142,7 +96,7 @@ public class Utils {
     return sb.toString();
   }
 
-  private static int[] test(String reference, String code) {
+  private static int[] tabIndicesPermutation(String reference, String code) {
     int[] tab = new int[code.length()];
     code = code.toUpperCase();
     reference = reference.toUpperCase();
@@ -172,7 +126,7 @@ public class Utils {
     return tab;
   }
 
-  public static String getMotPermutation(int[] tab, String code) {
+  private static String getMotPermutation(int[] tab, String code) {
     String codeOrd = "";
     Integer index = 0;
     do {
@@ -183,7 +137,7 @@ public class Utils {
     return codeOrd;
   }
 
-  public static String getIndicePermutation(int[] tab) {
+  private static String getIndicePermutation(int[] tab) {
     String perm = "";
     int nbiter = tab.length;
 
@@ -198,7 +152,7 @@ public class Utils {
   }
 
   public static String indicePermutation(String reference, String code) {
-    int index[] = test(reference, code);
+    int index[] = tabIndicesPermutation(reference, code);
 
     return getIndicePermutation(index);
 
@@ -206,19 +160,11 @@ public class Utils {
   }
 
   public static String motPermutation(String reference, String code) {
-    int index[] = test(reference, code);
+    int index[] = tabIndicesPermutation(reference, code);
 
     return getMotPermutation(index, code);
 
 
-  }
-
-  public static void main(String[] args) {
-    Utils u = new Utils();
-
-    System.out.println(indicePermutation("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "MARCEL"));
-    System.out.println(motPermutation("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "MARCEL"));
-    System.out.println(indicePermutation("MARCEL", "ACELMR"));
   }
 }
 
