@@ -36,23 +36,20 @@ public class Utils {
 
   public static String calculPermutation(String code){
 
-    String permutation = "2,4,5,6,1,3";
+    Crypto crypto = new Crypto();
 
-    //TODO:générer code permutation selon code (exemple DEMAIN)
+    String permutation = crypto.creerPermut(code);
 
     return permutation;
 
   }
 
   public static String[][] permuter(String[][] grille, String permutation, String messageAvantPermutation){
+    String[] split = permutation.split(",");
     ArrayList<Integer> l = new ArrayList<>();
-    l.add(1);
-    l.add(3);
-    l.add(4);
-    l.add(5);
-    l.add(0);
-    l.add(2);
-    //A effacer après implémentation calculPermutation
+    for(String s : split){
+      l.add(Integer.parseInt(s)-1);
+    }
 
     int taillelig = (int) Math.ceil(messageAvantPermutation.length() / l.size());
     int taillecol = l.size();
