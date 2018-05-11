@@ -9,10 +9,13 @@ public class Utils {
 
   public static String[][] generer(String code, String messageChiffre) {
 
-    int taillelig = (int) Math.ceil(messageChiffre.length() / code.length());
+    Double d1 = Double.parseDouble(String.valueOf(messageChiffre.length()));
+    Double d2 = Double.parseDouble(String.valueOf(code.length()));
+    int taillelig = (int) Math.ceil(d1/d2);
+    System.out.println(taillelig);
     int taillecol = code.length();
 
-    String[][] grille = new String[taillelig+1][taillecol];
+    String[][] grille = new String[taillelig][taillecol];
 
     int i = 0;
     int j = 0;
@@ -25,7 +28,7 @@ public class Utils {
           Character cc = messageChiffre.charAt(count);
           grille[i][j] = cc.toString();
         } else {
-          grille[i][j] = "";
+          grille[i][j] = "X";
         }
         count++;
       }
@@ -39,28 +42,16 @@ public class Utils {
     String[] split = permutation.split(",");
     ArrayList<Integer> l = new ArrayList<>();
     for(String s : split){
-      l.add(Integer.parseInt(s)-1);
+      l.add(Integer.parseInt(s));
     }
 
-    int taillelig = (int) Math.ceil(messageAvantPermutation.length() / l.size());
-    int taillecol = l.size();
-    String[][] grillePermute= new String [taillelig+1][taillecol];
-    int colGrillePermutation;
-    int indexPermutation = 0;
-    int colGrille = 0;
+    String[][] grillePermute= new String[grille.length][grille[0].length];
 
-    do{
-
-      colGrillePermutation = l.get(indexPermutation);
-
-      for(int j = 0; j <= taillelig; j++) {
-        grillePermute[j][colGrille] = grille[j][colGrillePermutation];
-
+    for(int i = 0;i<grille.length;i++){
+      for(int j = 0;j<grille[i].length;j++){
+        grillePermute[i][l.indexOf(j+1)] = grille[i][j];
       }
-      colGrille++;
-      indexPermutation++;
-
-    } while (colGrille<=l.size()-1);
+    }
 
     return grillePermute;
 
