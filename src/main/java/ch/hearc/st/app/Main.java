@@ -65,7 +65,7 @@ public class Main {
     System.out.println("Le message a donc été chiffré et il suffit de reprendre les lettres"
         + " une par une ");
     System.out.println("Message chiffré :");
-    String messageChiffreCrypte = Utils.lire(grille2);
+    String messageChiffreCrypte = Utils.lirecol(grille2);
     System.out.println(messageChiffreCrypte);
 
     messageChiffreCrypte = messageChiffreCrypte.replaceAll(" ", "");
@@ -91,7 +91,7 @@ public class Main {
     System.out.println("La grille contient les éléments dans le bon ordre, il suffit maintenant "
         + "de reprendre les lettres de grille afin de dechiffrer le message");
 
-    String messageDechiffreCrypte = Utils.lire(grille3);
+    String messageDechiffreCrypte = Utils.lirelig(grille3);
     System.out.println(messageDechiffreCrypte);
     messageDechiffreCrypte = messageDechiffreCrypte.replaceAll(" ", "");
     String messageDechiffre = grilleADFGVX.dechiffrer(messageDechiffreCrypte);
