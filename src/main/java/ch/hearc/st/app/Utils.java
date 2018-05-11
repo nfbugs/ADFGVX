@@ -54,7 +54,7 @@ public class Utils {
       colGrillePermutation = l.get(indexPermutation);
 
       for(int j = 0; j <= taillelig; j++) {
-        grillePermute[j][colGrillePermutation] = grille[j][colGrille];
+        grillePermute[j][colGrille] = grille[j][colGrillePermutation];
 
       }
       colGrille++;
@@ -66,7 +66,26 @@ public class Utils {
 
   }
 
-  public static String lire(String[][] grille){
+  public static String lirecol(String[][] grille) {
+    StringBuilder sb = new StringBuilder();
+    int i = 0;
+    int j = 0;
+    int count = 0;
+    for (j = 0; j < grille[0].length; j++){
+      for (i = 0; i < grille.length; i++) {
+        if(!grille[i][j].equals("")) {
+          count++;
+          sb.append(grille[i][j]);
+          if(count%5==0){
+            sb.append(" ");
+          }
+        }
+      }
+    }
+    return sb.toString();
+  }
+
+  public static String lirelig(String[][] grille){
     StringBuilder sb = new StringBuilder();
     int i = 0;
     int j = 0;
@@ -82,6 +101,7 @@ public class Utils {
     }
     return sb.toString();
   }
+
 
   public static String print(String[][] grille){
     StringBuilder sb = new StringBuilder();
