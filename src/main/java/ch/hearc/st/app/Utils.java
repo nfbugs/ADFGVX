@@ -17,8 +17,8 @@ public class Utils {
 
     String[][] grille = new String[taillelig][taillecol];
 
-    int i = 0;
-    int j = 0;
+    int i;
+    int j;
     int count = 0;
 
     for (i = 0; i < grille.length; i++) {
