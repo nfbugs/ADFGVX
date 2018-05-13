@@ -148,17 +148,17 @@ public class Utils {
   }
 
   private static String getIndicePermutation(int[] tab) {
-    String perm = "";
+    StringBuilder perm = new StringBuilder();
     int nbiter = tab.length;
 
     for (int m = 0; m < nbiter; m++) {
-      perm += tab[m];
+      perm.append(tab[m]);
       if (m < nbiter - 1) {
-        perm += ",";
+        perm.append(",");
       }
     }
 
-    return perm;
+    return perm.toString();
   }
 
   public static String indicePermutation(String reference, String code) {
