@@ -59,8 +59,8 @@ public class Utils {
 
   public static String lirecol(String[][] grille) {
     StringBuilder sb = new StringBuilder();
-    int i = 0;
-    int j = 0;
+    int i;
+    int j;
     int count = 0;
     for (j = 0; j < grille[0].length; j++){
       for (i = 0; i < grille.length; i++) {
