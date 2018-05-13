@@ -96,8 +96,8 @@ public class Utils {
 
   public static String print(String[][] grille){
     StringBuilder sb = new StringBuilder();
-    int i = 0;
-    int j = 0;
+    int i;
+    int j;
     for(i=0;i<grille.length;i++){
       for(j=0;j<grille[i].length;j++){
         sb.append(grille[i][j]).append(" ");
