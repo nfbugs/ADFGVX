@@ -137,14 +137,14 @@ public class Utils {
   }
 
   private static String getMotPermutation(int[] tab, String code) {
-    String codeOrd = "";
+    StringBuilder codeOrd = new StringBuilder();
     Integer index = 0;
     do {
-      codeOrd += (code.charAt((tab[index] - 1)));
+      codeOrd.append(code.charAt((tab[index] - 1)));
       index++;
     } while (index < tab.length);
 
-    return codeOrd;
+    return codeOrd.toString();
   }
 
   private static String getIndicePermutation(int[] tab) {
