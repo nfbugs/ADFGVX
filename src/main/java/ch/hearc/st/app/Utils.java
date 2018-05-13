@@ -78,8 +78,8 @@ public class Utils {
 
   public static String lirelig(String[][] grille){
     StringBuilder sb = new StringBuilder();
-    int i = 0;
-    int j = 0;
+    int i;
+    int j;
     int count = 1;
     for(i=0;i<grille.length;i++){
       for(j=0;j<grille[i].length;j++){
