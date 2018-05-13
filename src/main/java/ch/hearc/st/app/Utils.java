@@ -111,7 +111,6 @@ public class Utils {
     int[] tab = new int[code.length()];
     code = code.toUpperCase();
     reference = reference.toUpperCase();
-    String perm = "";
     int nbiter = code.length();
     int k = 0;
 
