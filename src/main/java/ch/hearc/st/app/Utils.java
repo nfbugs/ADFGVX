@@ -17,8 +17,8 @@ public class Utils {
 
     String[][] grille = new String[taillelig][taillecol];
 
-    int i = 0;
-    int j = 0;
+    int i;
+    int j;
     int count = 0;
 
     for (i = 0; i < grille.length; i++) {
@@ -38,7 +38,7 @@ public class Utils {
   }
 
 
-  public static String[][] permuter(String[][] grille, String permutation, String messageAvantPermutation){
+  public static String[][] permuter(String[][] grille, String permutation) {
     String[] split = permutation.split(",");
     ArrayList<Integer> l = new ArrayList<>();
     for(String s : split){
@@ -59,8 +59,8 @@ public class Utils {
 
   public static String lirecol(String[][] grille) {
     StringBuilder sb = new StringBuilder();
-    int i = 0;
-    int j = 0;
+    int i;
+    int j;
     int count = 0;
     for (j = 0; j < grille[0].length; j++){
       for (i = 0; i < grille.length; i++) {
@@ -78,8 +78,8 @@ public class Utils {
 
   public static String lirelig(String[][] grille){
     StringBuilder sb = new StringBuilder();
-    int i = 0;
-    int j = 0;
+    int i;
+    int j;
     int count = 1;
     for(i=0;i<grille.length;i++){
       for(j=0;j<grille[i].length;j++){
@@ -96,8 +96,8 @@ public class Utils {
 
   public static String print(String[][] grille){
     StringBuilder sb = new StringBuilder();
-    int i = 0;
-    int j = 0;
+    int i;
+    int j;
     for(i=0;i<grille.length;i++){
       for(j=0;j<grille[i].length;j++){
         sb.append(grille[i][j]).append(" ");
@@ -111,7 +111,6 @@ public class Utils {
     int[] tab = new int[code.length()];
     code = code.toUpperCase();
     reference = reference.toUpperCase();
-    String perm = "";
     int nbiter = code.length();
     int k = 0;
 
@@ -138,28 +137,28 @@ public class Utils {
   }
 
   private static String getMotPermutation(int[] tab, String code) {
-    String codeOrd = "";
+    StringBuilder codeOrd = new StringBuilder();
     Integer index = 0;
     do {
-      codeOrd += (code.charAt((tab[index] - 1)));
+      codeOrd.append(code.charAt((tab[index] - 1)));
       index++;
     } while (index < tab.length);
 
-    return codeOrd;
+    return codeOrd.toString();
   }
 
   private static String getIndicePermutation(int[] tab) {
-    String perm = "";
+    StringBuilder perm = new StringBuilder();
     int nbiter = tab.length;
 
     for (int m = 0; m < nbiter; m++) {
-      perm += tab[m];
+      perm.append(tab[m]);
       if (m < nbiter - 1) {
-        perm += ",";
+        perm.append(",");
       }
     }
 
-    return perm;
+    return perm.toString();
   }
 
   public static String indicePermutation(String reference, String code) {

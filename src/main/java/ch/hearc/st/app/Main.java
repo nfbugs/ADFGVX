@@ -9,13 +9,28 @@ public class Main {
   public static void main(String[] args) {
     String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     GrilleADFGVX grilleADFGVX = new GrilleADFGVX();
+    Boolean random = false;
+    String reponse;
+
     System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
     System.out.println("PREPARATION POUR LE CHIFFREMENT");
     System.out.println();
     System.out.println("Message à chiffrer :");
     String message = scanner.nextLine();
 
-    grilleADFGVX.creer(false);
+    System.out.println("Grille aléatoire ? o/n");
+    reponse = scanner.nextLine();
+
+    switch (reponse) {
+      case "o":
+        random = true;
+        break;
+      case "n":
+        random = false;
+        break;
+    }
+
+    grilleADFGVX.creer(random);
     System.out.println("---Grille ADFGVX---");
     System.out.println(grilleADFGVX.print());
     System.out.println("-------------------");
@@ -58,7 +73,7 @@ public class Main {
 
 
     System.out.println("Grille 2");
-    String[][] grille2 = Utils.permuter(grille1, permutation, messageAvantPermutation);
+    String[][] grille2 = Utils.permuter(grille1, permutation);
     System.out.println(Utils.print(grille2));
     System.out.println();
 
@@ -83,8 +98,8 @@ public class Main {
     System.out.println();
     System.out.println("Grille 3");
 
-    String[][] grille3 = Utils.permuter(grille2, newpermutation,
-        messageChiffreCrypte);
+    String[][] grille3 = Utils.permuter(grille2, newpermutation
+    );
 
     System.out.println(Utils.print(grille3));
     System.out.println();
