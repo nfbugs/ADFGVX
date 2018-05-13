@@ -73,7 +73,7 @@ public class Main {
 
 
     System.out.println("Grille 2");
-    String[][] grille2 = Utils.permuter(grille1, permutation, messageAvantPermutation);
+    String[][] grille2 = Utils.permuter(grille1, permutation);
     System.out.println(Utils.print(grille2));
     System.out.println();
 
@@ -98,8 +98,8 @@ public class Main {
     System.out.println();
     System.out.println("Grille 3");
 
-    String[][] grille3 = Utils.permuter(grille2, newpermutation,
-        messageChiffreCrypte);
+    String[][] grille3 = Utils.permuter(grille2, newpermutation
+    );
 
     System.out.println(Utils.print(grille3));
     System.out.println();

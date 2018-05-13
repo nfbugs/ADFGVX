@@ -38,7 +38,7 @@ public class Utils {
   }
 
 
-  public static String[][] permuter(String[][] grille, String permutation, String messageAvantPermutation){
+  public static String[][] permuter(String[][] grille, String permutation) {
     String[] split = permutation.split(",");
     ArrayList<Integer> l = new ArrayList<>();
     for(String s : split){
